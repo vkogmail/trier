@@ -14,14 +14,19 @@
     --paper:#F1F3EF;
     --card:#FFFFFF;
     --gold:#B08428;
+    --gold-soft:#F3EADB;
     --river:#3D6B76;
+    --river-soft:#E4EEF0;
     --line:#D6DBD4;
     --rail:2px;
   }
   *{box-sizing:border-box;}
   body{
     margin:0;
-    background:var(--paper);
+    background:
+      radial-gradient(1200px 480px at 10% -10%, #e8eee8 0%, transparent 55%),
+      radial-gradient(900px 420px at 100% 0%, #e4ecee 0%, transparent 50%),
+      var(--paper);
     color:var(--slate);
     font-family:"Public Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
     font-size:16px;
@@ -44,15 +49,17 @@
   .sub{margin:0;color:var(--slate-soft);font-size:15px;}
 
   .facts{
-    display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
     gap:1px;background:var(--line);border:1px solid var(--line);
     margin:28px 0 40px;
   }
   .fact{background:var(--card);padding:14px 16px;}
   .fact dt{
+    display:flex;align-items:center;gap:7px;
     font-size:11px;letter-spacing:.14em;text-transform:uppercase;
-    color:var(--slate-soft);font-weight:700;margin:0 0 4px;
+    color:var(--slate-soft);font-weight:700;margin:0 0 6px;
   }
+  .fact dt svg{width:14px;height:14px;stroke:var(--river);flex-shrink:0;}
   .fact dd{margin:0;font-size:15px;font-weight:500;}
   .fact dd a{color:var(--river);}
 
@@ -64,27 +71,78 @@
   }
   .day-head span{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700;}
 
-  ol.rail{list-style:none;margin:0;padding:0 0 0 92px;position:relative;}
-  ol.rail::before{
-    content:"";position:absolute;left:74px;top:14px;bottom:14px;
-    width:1px;background:var(--line);
+  ol.rail{
+    list-style:none;margin:0;padding:0;
+    --time-w:56px;
+    --mark-w:40px;
   }
-  ol.rail li{position:relative;padding:16px 0;border-bottom:1px solid var(--line);}
+  ol.rail li{
+    display:grid;
+    grid-template-columns:var(--time-w) var(--mark-w) minmax(0,1fr);
+    column-gap:0;
+    align-items:start;
+    position:relative;
+    padding:16px 0;
+    border-bottom:1px solid var(--line);
+  }
   ol.rail li:last-child{border-bottom:none;}
+  ol.rail li:last-child .mark::after{display:none;}
+
   .t{
-    position:absolute;left:-92px;top:16px;width:60px;text-align:right;
-    font-variant-numeric:tabular-nums;font-weight:700;font-size:14px;color:var(--slate);
+    grid-column:1;
+    width:var(--time-w);
+    text-align:right;
+    font-variant-numeric:tabular-nums;
+    font-weight:700;font-size:14px;color:var(--slate);
+    line-height:24px;
+    padding-right:4px;
   }
-  ol.rail li::before{
-    content:"";position:absolute;left:-19px;top:22px;
-    width:9px;height:9px;border-radius:50%;
-    background:var(--paper);border:2px solid var(--river);
+
+  .mark{
+    grid-column:2;
+    position:relative;
+    width:var(--mark-w);
+    height:24px;
+    display:flex;align-items:center;justify-content:center;
   }
-  li.anchor::before{background:var(--gold);border-color:var(--gold);}
-  .what-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
-  .what{font-weight:700;}
-  .where{color:var(--slate-soft);font-size:14px;display:block;margin-top:2px;}
-  .note{font-size:14px;color:var(--slate-soft);margin-top:4px;}
+  .mark::before{
+    content:"";
+    position:absolute;
+    left:50%;top:24px;bottom:-16px;
+    width:1px;background:var(--line);
+    transform:translateX(-50%);
+  }
+  ol.rail li:last-child .mark::before{display:none;}
+  .dot{
+    position:relative;z-index:1;
+    width:24px;height:24px;border-radius:50%;
+    background:var(--card);
+    border:1.5px solid var(--river);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 0 0 4px var(--paper);
+  }
+  .dot svg{width:12px;height:12px;stroke:var(--river);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+  li.anchor .dot{
+    background:var(--gold);
+    border-color:var(--gold);
+  }
+  li.anchor .dot svg{stroke:#fff;}
+
+  .body{grid-column:3;min-width:0;padding-top:1px;}
+  .what-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;min-height:24px;}
+  .what{font-weight:700;line-height:1.35;}
+  .where{color:var(--slate-soft);font-size:14px;display:block;margin-top:4px;}
+  .note{
+    font-size:13px;color:var(--slate-soft);margin:8px 0 0;
+    padding:8px 10px;background:var(--river-soft);border-radius:6px;
+  }
+  .badge{
+    display:inline-flex;align-items:center;gap:4px;
+    font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--gold);background:var(--gold-soft);
+    border-radius:999px;padding:2px 8px;white-space:nowrap;
+  }
+  .badge svg{width:10px;height:10px;stroke:var(--gold);}
   .maplink{
     font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
     color:var(--river);text-decoration:none;border:1px solid var(--river);
@@ -95,22 +153,25 @@
   .callout{
     background:var(--card);border-left:3px solid var(--gold);
     padding:14px 16px;margin:22px 0 0;font-size:14px;
+    display:flex;gap:12px;align-items:flex-start;
   }
+  .callout > svg{width:18px;height:18px;stroke:var(--gold);flex-shrink:0;margin-top:1px;}
   .callout strong{display:block;margin-bottom:4px;}
 
   footer{border-top:var(--rail) solid var(--slate);padding-top:18px;font-size:13px;color:var(--slate-soft);}
   footer p{margin:0 0 8px;}
 
   @media (max-width:520px){
-    ol.rail{padding-left:66px;}
-    ol.rail::before{left:50px;}
-    .t{left:-66px;width:44px;font-size:13px;}
-    ol.rail li::before{left:-20px;}
+    ol.rail{--time-w:44px;--mark-w:34px;}
+    .t{font-size:13px;}
+    .dot{width:22px;height:22px;}
+    .dot svg{width:11px;height:11px;}
   }
   @media print{
     body{background:#fff;}
     .wrap{padding:0;}
     .maplink{display:none;}
+    .dot{box-shadow:none;}
   }
 </style>
 </head>
@@ -124,44 +185,112 @@
 </header>
 
 <dl class="facts">
-  <div class="fact"><dt>Hotel</dt><dd><a href="https://www.google.com/maps/search/?api=1&query=ibis+Styles+Trier+Metzelstrasse+12" target="_blank" rel="noopener">ibis Styles Trier, Metzelstraße 12</a></dd></div>
-  <div class="fact"><dt>Parkeren</dt><dd><a href="https://www.google.com/maps/search/?api=1&query=City+Parking+Zuckerbergstrasse+Trier" target="_blank" rel="noopener">City Parking, Zuckerbergstraße</a>, 18 euro per 24 uur, 80 m lopen</dd></div>
-  <div class="fact"><dt>Hotelparking</dt><dd>25 plaatsen, 24 euro per nacht, niet te reserveren</dd></div>
-  <div class="fact"><dt>Laden Trier</dt><dd><a href="https://www.google.com/maps/search/?api=1&query=Tesla+Supercharger+Zurmaiener+Strasse+Trier" target="_blank" rel="noopener">Supercharger Zurmaiener Str.</a>, 8 palen, 250 kW</dd></div>
-  <div class="fact"><dt>Laden terugweg</dt><dd><a href="https://www.google.com/maps/search/?api=1&query=Tesla+Supercharger+Slakweg+5+Maastricht" target="_blank" rel="noopener">Supercharger Maastricht</a>, dan lunch bij <a href="https://www.google.com/maps/search/?api=1&query=M%27ART+Rijksweg+80+Maastricht" target="_blank" rel="noopener">M'ART</a></dd></div>
-  <div class="fact"><dt>Sekt Gala</dt><dd><a href="https://www.google.com/maps/search/?api=1&query=Palastgarten+Trier" target="_blank" rel="noopener">Palastgarten</a>, dagelijks vanaf 17:00</dd></div>
+  <div class="fact">
+    <dt>
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/></svg>
+      Hotel
+    </dt>
+    <dd><a href="https://www.google.com/maps/search/?api=1&query=ibis+Styles+Trier+Metzelstrasse+12" target="_blank" rel="noopener">ibis Styles Trier, Metzelstraße 12</a></dd>
+  </div>
+  <div class="fact">
+    <dt>
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 16v-4"/><path d="M12 16v-2"/><path d="M17 16V8"/></svg>
+      Parkeren
+    </dt>
+    <dd><a href="https://www.google.com/maps/search/?api=1&query=City+Parking+Zuckerbergstrasse+Trier" target="_blank" rel="noopener">City Parking, Zuckerbergstraße</a>, 18 euro per 24 uur, 80 m lopen</dd>
+  </div>
+  <div class="fact">
+    <dt>
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9 10h.01"/><path d="M15 10h.01"/><path d="M8 15h8"/></svg>
+      Hotelparking
+    </dt>
+    <dd>25 plaatsen, 24 euro per nacht, niet te reserveren</dd>
+  </div>
+  <div class="fact">
+    <dt>
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h8l-1 8 10-12h-8l1-8z"/></svg>
+      Laden Trier
+    </dt>
+    <dd><a href="https://www.google.com/maps/search/?api=1&query=Tesla+Supercharger+Zurmaiener+Strasse+Trier" target="_blank" rel="noopener">Supercharger Zurmaiener Str.</a>, 8 palen, 250 kW</dd>
+  </div>
+  <div class="fact">
+    <dt>
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 17h14"/><path d="M7 17V7a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v10"/><path d="M9 17v2"/><path d="M15 17v2"/><path d="M9 10h6"/></svg>
+      Laden terugweg
+    </dt>
+    <dd><a href="https://www.google.com/maps/search/?api=1&query=Tesla+Supercharger+Slakweg+5+Maastricht" target="_blank" rel="noopener">Supercharger Maastricht</a>, dan lunch bij <a href="https://www.google.com/maps/search/?api=1&query=M%27ART+Rijksweg+80+Maastricht" target="_blank" rel="noopener">M'ART</a></dd>
+  </div>
+  <div class="fact">
+    <dt>
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 22h8"/><path d="M12 2v4"/><path d="M7 8c0 4 2.5 6 5 8 2.5-2 5-4 5-8a5 5 0 0 0-10 0Z"/></svg>
+      Sekt Gala
+    </dt>
+    <dd><a href="https://www.google.com/maps/search/?api=1&query=Palastgarten+Trier" target="_blank" rel="noopener">Palastgarten</a>, dagelijks vanaf 17:00</dd>
+  </div>
 </dl>
 
 <section class="day">
   <div class="day-head"><h2>Vrijdag</h2><span>Heenreis en dineren</span></div>
   <ol class="rail">
-    <li><span class="t">09:00</span>
-      <div class="what-row"><span class="what">Vertrek Badhoevedorp, accu op 100 procent</span></div>
-      <span class="where">A2 richting Den Bosch, dan A50 naar Sint-Oedenrode. Ongeveer 110 km, 1 uur 15.</span>
+    <li>
+      <span class="t">09:00</span>
+      <span class="mark" aria-hidden="true"><span class="dot"><svg viewBox="0 0 24 24"><path d="M5 17h14v-5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2z"/><path d="M7 10V7a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v3"/><circle cx="7.5" cy="17" r="1.5"/><circle cx="16.5" cy="17" r="1.5"/></svg></span></span>
+      <div class="body">
+        <div class="what-row"><span class="what">Vertrek Badhoevedorp, accu op 100 procent</span></div>
+        <span class="where">A2 richting Den Bosch, dan A50 naar Sint-Oedenrode. Ongeveer 110 km, 1 uur 15.</span>
+      </div>
     </li>
-    <li><span class="t">10:15</span>
-      <div class="what-row"><span class="what">Tussenstop Sint-Oedenrode</span> <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=Oude+Lieshoutseweg+1+Sint-Oedenrode" target="_blank" rel="noopener">Kaart</a></div>
-      <span class="where">Oude Lieshoutseweg 1. Ongeveer 30 minuten.</span>
+    <li>
+      <span class="t">10:15</span>
+      <span class="mark" aria-hidden="true"><span class="dot"><svg viewBox="0 0 24 24"><path d="M12 21s7-4.5 7-11a7 7 0 1 0-14 0c0 6.5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span></span>
+      <div class="body">
+        <div class="what-row"><span class="what">Tussenstop Sint-Oedenrode</span> <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=Oude+Lieshoutseweg+1+Sint-Oedenrode" target="_blank" rel="noopener">Kaart</a></div>
+        <span class="where">Oude Lieshoutseweg 1. Ongeveer 30 minuten.</span>
+      </div>
     </li>
-    <li><span class="t">10:45</span>
-      <div class="what-row"><span class="what">Verder naar Trier</span></div>
-      <span class="where">Weer aansluiten op de A2/A67 richting Venlo, dan A61 richting Koblenz, A48 en A1. Nog ongeveer 335 km.</span>
+    <li>
+      <span class="t">10:45</span>
+      <span class="mark" aria-hidden="true"><span class="dot"><svg viewBox="0 0 24 24"><path d="M5 17h14v-5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2z"/><path d="M7 10V7a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v3"/><circle cx="7.5" cy="17" r="1.5"/><circle cx="16.5" cy="17" r="1.5"/></svg></span></span>
+      <div class="body">
+        <div class="what-row"><span class="what">Verder naar Trier</span></div>
+        <span class="where">Weer aansluiten op de A2/A67 richting Venlo, dan A61 richting Koblenz, A48 en A1. Nog ongeveer 335 km.</span>
+      </div>
     </li>
-    <li><span class="t">12:45</span>
-      <div class="what-row"><span class="what">Laadstop onderweg, naar 85 procent</span></div>
-      <span class="where">De auto kiest de paal. Ongeveer 30 minuten, dus tijd voor koffie en een broodje.</span>
+    <li>
+      <span class="t">12:45</span>
+      <span class="mark" aria-hidden="true"><span class="dot"><svg viewBox="0 0 24 24"><path d="M13 2 3 14h8l-1 8 10-12h-8l1-8z"/></svg></span></span>
+      <div class="body">
+        <div class="what-row"><span class="what">Laadstop onderweg, naar 85 procent</span></div>
+        <span class="where">De auto kiest de paal. Ongeveer 30 minuten, dus tijd voor koffie en een broodje.</span>
+      </div>
     </li>
-    <li><span class="t">14:45</span>
-      <div class="what-row"><span class="what">Aankomst, auto naar City Parking</span> <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=City+Parking+Zuckerbergstrasse+Trier" target="_blank" rel="noopener">Kaart</a></div>
-      <span class="where">Zuckerbergstraße, 18 euro per 24 uur, 970 plaatsen, 24 uur open. 80 meter lopen naar het hotel.</span>
+    <li>
+      <span class="t">14:45</span>
+      <span class="mark" aria-hidden="true"><span class="dot"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 16v-4"/><path d="M12 16v-2"/><path d="M17 16V8"/></svg></span></span>
+      <div class="body">
+        <div class="what-row"><span class="what">Aankomst, auto naar City Parking</span> <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=City+Parking+Zuckerbergstrasse+Trier" target="_blank" rel="noopener">Kaart</a></div>
+        <span class="where">Zuckerbergstraße, 18 euro per 24 uur, 970 plaatsen, 24 uur open. 80 meter lopen naar het hotel.</span>
+      </div>
     </li>
-    <li><span class="t">15:15</span>
-      <div class="what-row"><span class="what">Rondje Altstadt</span></div>
-      <span class="where">Hauptmarkt, Dom, Porta Nigra. Koffie bij <a href="https://www.google.com/maps/search/?api=1&query=Shluk+Dietrichstrasse+49+Trier" target="_blank" rel="noopener">Shluk</a>, Dietrichstraße 49.</span>
+    <li>
+      <span class="t">15:15</span>
+      <span class="mark" aria-hidden="true"><span class="dot"><svg viewBox="0 0 24 24"><path d="M4 19V7a2 2 0 0 1 2-2h4l2 3h6a2 2 0 0 1 2 2v9"/><path d="M9 19v-4h6v4"/><path d="M3 19h18"/></svg></span></span>
+      <div class="body">
+        <div class="what-row"><span class="what">Rondje Altstadt</span></div>
+        <span class="where">Hauptmarkt, Dom, Porta Nigra. Koffie bij <a href="https://www.google.com/maps/search/?api=1&query=Shluk+Dietrichstrasse+49+Trier" target="_blank" rel="noopener">Shluk</a>, Dietrichstraße 49.</span>
+      </div>
     </li>
-    <li class="anchor"><span class="t">17:30</span>
-      <div class="what-row"><span class="what">Diner bij masons</span> <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=masons+Restaurant+Leopoldplatz+1+Trier" target="_blank" rel="noopener">Kaart</a></div>
-      <span class="where">Leopoldplatz 1. Concept met kleine gerechten uit de hele wereld, om de zes minuten een nieuwe ronde. Open tot 23:00, dus alle tijd. Gereserveerd.</span>
+    <li class="anchor">
+      <span class="t">17:30</span>
+      <span class="mark" aria-hidden="true"><span class="dot"><svg viewBox="0 0 24 24"><path d="M4 11h16"/><path d="M12 3v8"/><path d="M8 21h8"/><path d="M7 11c0 4 2 6 5 8 3-2 5-4 5-8"/><path d="M9 3h6"/></svg></span></span>
+      <div class="body">
+        <div class="what-row">
+          <span class="what">Diner bij masons</span>
+          <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Gereserveerd</span>
+          <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=masons+Restaurant+Leopoldplatz+1+Trier" target="_blank" rel="noopener">Kaart</a>
+        </div>
+        <span class="where">Leopoldplatz 1. Concept met kleine gerechten uit de hele wereld, om de zes minuten een nieuwe ronde. Open tot 23:00, dus alle tijd.</span>
+      </div>
     </li>
   </ol>
 </section>
@@ -169,62 +298,123 @@
 <section class="day">
   <div class="day-head"><h2>Zaterdag</h2><span>Irrel, laden en Gala</span></div>
   <ol class="rail">
-    <li><span class="t">10:00</span>
-      <div class="what-row"><span class="what">Vertrek naar Irrel</span> <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=Parkplatz+Irreler+Wasserf%C3%A4lle+Pr%C3%BCmzurlayer+Strasse+Irrel" target="_blank" rel="noopener">Kaart</a></div>
-      <span class="where">Parkeerplaats "Irreler Wasserfälle" aan de L4, Prümzurlayer Straße, 54666 Irrel. Gratis, middelgroot. Ongeveer 35 tot 40 minuten rijden.</span>
+    <li>
+      <span class="t">10:00</span>
+      <span class="mark" aria-hidden="true"><span class="dot"><svg viewBox="0 0 24 24"><path d="M5 17h14v-5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2z"/><path d="M7 10V7a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v3"/><circle cx="7.5" cy="17" r="1.5"/><circle cx="16.5" cy="17" r="1.5"/></svg></span></span>
+      <div class="body">
+        <div class="what-row"><span class="what">Vertrek naar Irrel</span> <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=Parkplatz+Irreler+Wasserf%C3%A4lle+Pr%C3%BCmzurlayer+Strasse+Irrel" target="_blank" rel="noopener">Kaart</a></div>
+        <span class="where">Parkeerplaats "Irreler Wasserfälle" aan de L4, Prümzurlayer Straße, 54666 Irrel. Gratis, middelgroot. Ongeveer 35 tot 40 minuten rijden.</span>
+      </div>
     </li>
-    <li class="anchor"><span class="t">10:45</span>
-      <div class="what-row"><span class="what">Wandeling: Irreler Wasserfälle</span></div>
-      <span class="where">Ongeveer 3 km, ruim een uur. Stroomversnellingen van de Prüm over grote rotsblokken, met de nieuwe hangbrug uit 2023, 110 meter lang en 16 meter hoog.</span>
-      <p class="note">Rond de brug kan het 's zomers druk zijn, dus vroeg gaan is prettiger. De rest van de route is rustiger.</p>
+    <li class="anchor">
+      <span class="t">10:45</span>
+      <span class="mark" aria-hidden="true"><span class="dot"><svg viewBox="0 0 24 24"><path d="m14 6-4 4 4 4"/><path d="M10 10h9"/><path d="M4 20v-2a4 4 0 0 1 4-4h1"/><circle cx="7" cy="6" r="2"/></svg></span></span>
+      <div class="body">
+        <div class="what-row"><span class="what">Wandeling: Irreler Wasserfälle</span></div>
+        <span class="where">Ongeveer 3 km, ruim een uur. Stroomversnellingen van de Prüm over grote rotsblokken, met de nieuwe hangbrug uit 2023, 110 meter lang en 16 meter hoog.</span>
+        <p class="note">Rond de brug kan het 's zomers druk zijn, dus vroeg gaan is prettiger. De rest van de route is rustiger.</p>
+      </div>
     </li>
-    <li><span class="t">12:15</span>
-      <div class="what-row"><span class="what">Terug naar Trier voor lunch</span></div>
-      <span class="where">Zelfde rijtijd terug, dus rond 13:00 weer in de Altstadt. Bijvoorbeeld <a href="https://www.google.com/maps/search/?api=1&query=Restaurant+Kartoffel+Kiste+Fahrstrasse+13+Trier" target="_blank" rel="noopener">Kartoffel Kiste</a> of <a href="https://www.google.com/maps/search/?api=1&query=Leanis+Cafe+Viehmarktstrasse+11+Trier" target="_blank" rel="noopener">Leanis Cafe</a>.</span>
+    <li>
+      <span class="t">12:15</span>
+      <span class="mark" aria-hidden="true"><span class="dot"><svg viewBox="0 0 24 24"><path d="M5 17h14v-5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2z"/><path d="M7 10V7a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v3"/><circle cx="7.5" cy="17" r="1.5"/><circle cx="16.5" cy="17" r="1.5"/></svg></span></span>
+      <div class="body">
+        <div class="what-row"><span class="what">Terug naar Trier voor lunch</span></div>
+        <span class="where">Zelfde rijtijd terug, dus rond 13:00 weer in de Altstadt. Bijvoorbeeld <a href="https://www.google.com/maps/search/?api=1&query=Restaurant+Kartoffel+Kiste+Fahrstrasse+13+Trier" target="_blank" rel="noopener">Kartoffel Kiste</a> of <a href="https://www.google.com/maps/search/?api=1&query=Leanis+Cafe+Viehmarktstrasse+11+Trier" target="_blank" rel="noopener">Leanis Cafe</a>.</span>
+      </div>
     </li>
-    <li class="anchor"><span class="t">15:00</span>
-      <div class="what-row"><span class="what">Laden</span> <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=Tesla+Supercharger+Zurmaiener+Strasse+Trier" target="_blank" rel="noopener">Kaart</a></div>
-      <span class="where">Supercharger Zurmaiener Straße bij het E-Center. Laden tot 90 procent, dan is zondag geregeld.</span>
+    <li class="anchor">
+      <span class="t">15:00</span>
+      <span class="mark" aria-hidden="true"><span class="dot"><svg viewBox="0 0 24 24"><path d="M13 2 3 14h8l-1 8 10-12h-8l1-8z"/></svg></span></span>
+      <div class="body">
+        <div class="what-row"><span class="what">Laden</span> <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=Tesla+Supercharger+Zurmaiener+Strasse+Trier" target="_blank" rel="noopener">Kaart</a></div>
+        <span class="where">Supercharger Zurmaiener Straße bij het E-Center. Laden tot 90 procent, dan is zondag geregeld.</span>
+      </div>
     </li>
-    <li class="anchor"><span class="t">19:00</span>
-      <div class="what-row"><span class="what">Diner bij TAPASITO</span> <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=TAPASITO+Kornmarkt+10+Trier" target="_blank" rel="noopener">Kaart</a></div>
-      <span class="where">Kornmarkt 10, 4,9 sterren. Breakfast & tapas concept, terras is het hoogtepunt. Zaterdag open tot middernacht. 5 minuten lopen naar de Palastgarten. Gereserveerd.</span>
+    <li class="anchor">
+      <span class="t">19:00</span>
+      <span class="mark" aria-hidden="true"><span class="dot"><svg viewBox="0 0 24 24"><path d="M4 11h16"/><path d="M12 3v8"/><path d="M8 21h8"/><path d="M7 11c0 4 2 6 5 8 3-2 5-4 5-8"/><path d="M9 3h6"/></svg></span></span>
+      <div class="body">
+        <div class="what-row">
+          <span class="what">Diner bij TAPASITO</span>
+          <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Gereserveerd</span>
+          <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=TAPASITO+Kornmarkt+10+Trier" target="_blank" rel="noopener">Kaart</a>
+        </div>
+        <span class="where">Kornmarkt 10, 4,9 sterren. Breakfast & tapas concept, terras is het hoogtepunt. Zaterdag open tot middernacht. 5 minuten lopen naar de Palastgarten.</span>
+      </div>
     </li>
-    <li class="anchor"><span class="t">20:30</span>
-      <div class="what-row"><span class="what">Sekt Gala, WIRFANTASTISCHEN</span> <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=Palastgarten+Trier" target="_blank" rel="noopener">Kaart</a></div>
-      <span class="where">Palastgarten. Daarna DJane Rent a Sunshine om 21:30.</span>
+    <li class="anchor">
+      <span class="t">20:30</span>
+      <span class="mark" aria-hidden="true"><span class="dot"><svg viewBox="0 0 24 24"><path d="M8 22h8"/><path d="M12 2v4"/><path d="M7 8c0 4 2.5 6 5 8 2.5-2 5-4 5-8a5 5 0 0 0-10 0Z"/></svg></span></span>
+      <div class="body">
+        <div class="what-row"><span class="what">Sekt Gala, WIRFANTASTISCHEN</span> <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=Palastgarten+Trier" target="_blank" rel="noopener">Kaart</a></div>
+        <span class="where">Palastgarten. Daarna DJane Rent a Sunshine om 21:30.</span>
+      </div>
     </li>
   </ol>
   <div class="callout">
-    <strong>Alternatief als het weer tegenzit</strong>
-    Alleen de Grote Rundweg door de Teufelsschlucht, 3,5 km, ongeveer een uur. Je mist dan de watervallen maar de kloof zelf is het spectaculairste deel. Of ruil zaterdag en zondag alsnog om.
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 7v5c0 5 3.5 8.5 8 9 4.5-.5 8-4 8-9V7l-8-4z"/><path d="M12 8v5"/><path d="M12 16h.01"/></svg>
+    <div>
+      <strong>Alternatief als het weer tegenzit</strong>
+      Alleen de Grote Rundweg door de Teufelsschlucht, 3,5 km, ongeveer een uur. Je mist dan de watervallen maar de kloof zelf is het spectaculairste deel. Of ruil zaterdag en zondag alsnog om.
+    </div>
   </div>
 </section>
 
 <section class="day">
   <div class="day-head"><h2>Zondag</h2><span>Terugreis</span></div>
   <ol class="rail">
-    <li><span class="t">09:30</span>
-      <div class="what-row"><span class="what">Ontbijt en uitchecken</span></div>
-      <span class="where">Accu staat op circa 90 procent, dus direct weg.</span>
+    <li>
+      <span class="t">09:30</span>
+      <span class="mark" aria-hidden="true"><span class="dot"><svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/></svg></span></span>
+      <div class="body">
+        <div class="what-row"><span class="what">Ontbijt en uitchecken</span></div>
+        <span class="where">Accu staat op circa 90 procent, dus direct weg.</span>
+      </div>
     </li>
-    <li><span class="t">09:45</span>
-      <div class="what-row"><span class="what">Vertrek richting Maastricht</span></div>
-      <span class="where">Via Luxemburg en Luik, ongeveer 290 km. Een Model Y doet dat op ruwweg 70 tot 80 procent.</span>
+    <li>
+      <span class="t">09:45</span>
+      <span class="mark" aria-hidden="true"><span class="dot"><svg viewBox="0 0 24 24"><path d="M5 17h14v-5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2z"/><path d="M7 10V7a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v3"/><circle cx="7.5" cy="17" r="1.5"/><circle cx="16.5" cy="17" r="1.5"/></svg></span></span>
+      <div class="body">
+        <div class="what-row"><span class="what">Vertrek richting Maastricht</span></div>
+        <span class="where">Via Luxemburg en Luik, ongeveer 290 km. Een Model Y doet dat op ruwweg 70 tot 80 procent.</span>
+      </div>
     </li>
-    <li class="anchor"><span class="t">12:30</span>
-      <div class="what-row"><span class="what">Laden in Maastricht</span> <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=Tesla+Supercharger+Slakweg+5+Maastricht" target="_blank" rel="noopener">Kaart</a></div>
-      <span class="where">Supercharger Slakweg 5, 24 palen, 24/7. Reken op 25 minuten.</span>
+    <li class="anchor">
+      <span class="t">12:30</span>
+      <span class="mark" aria-hidden="true"><span class="dot"><svg viewBox="0 0 24 24"><path d="M13 2 3 14h8l-1 8 10-12h-8l1-8z"/></svg></span></span>
+      <div class="body">
+        <div class="what-row"><span class="what">Laden in Maastricht</span> <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=Tesla+Supercharger+Slakweg+5+Maastricht" target="_blank" rel="noopener">Kaart</a></div>
+        <span class="where">Supercharger Slakweg 5, 24 palen, 24/7. Reken op 25 minuten.</span>
+      </div>
     </li>
-    <li><span class="t">13:00</span>
-      <div class="what-row"><span class="what">Lunch bij M'ART</span> <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=M%27ART+Rijksweg+80+Maastricht" target="_blank" rel="noopener">Kaart</a></div>
-      <span class="where">Rijksweg 80, 1,3 km voorbij de laadpalen. Zondag open vanaf 12:00, eigen terras met uitzicht over de velden, parkeren bij de zaak. Gereserveerd.</span>
+    <li class="anchor">
+      <span class="t">13:00</span>
+      <span class="mark" aria-hidden="true"><span class="dot"><svg viewBox="0 0 24 24"><path d="M4 11h16"/><path d="M12 3v8"/><path d="M8 21h8"/><path d="M7 11c0 4 2 6 5 8 3-2 5-4 5-8"/><path d="M9 3h6"/></svg></span></span>
+      <div class="body">
+        <div class="what-row">
+          <span class="what">Lunch bij M'ART</span>
+          <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Gereserveerd</span>
+          <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=M%27ART+Rijksweg+80+Maastricht" target="_blank" rel="noopener">Kaart</a>
+        </div>
+        <span class="where">Rijksweg 80, 1,3 km voorbij de laadpalen. Zondag open vanaf 12:00, eigen terras met uitzicht over de velden, parkeren bij de zaak.</span>
+      </div>
     </li>
-    <li><span class="t">14:15</span>
-      <div class="what-row"><span class="what">Laatste stuk naar huis</span></div>
-      <span class="where">Ongeveer 200 km via de A2. Alternatieve stop: <a href="https://www.google.com/maps/search/?api=1&query=Tesla+Supercharger+Aalsterweg+322+Eindhoven" target="_blank" rel="noopener">Supercharger Eindhoven</a>, 24 palen.</span>
+    <li>
+      <span class="t">14:15</span>
+      <span class="mark" aria-hidden="true"><span class="dot"><svg viewBox="0 0 24 24"><path d="M5 17h14v-5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2z"/><path d="M7 10V7a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v3"/><circle cx="7.5" cy="17" r="1.5"/><circle cx="16.5" cy="17" r="1.5"/></svg></span></span>
+      <div class="body">
+        <div class="what-row"><span class="what">Laatste stuk naar huis</span></div>
+        <span class="where">Ongeveer 200 km via de A2. Alternatieve stop: <a href="https://www.google.com/maps/search/?api=1&query=Tesla+Supercharger+Aalsterweg+322+Eindhoven" target="_blank" rel="noopener">Supercharger Eindhoven</a>, 24 palen.</span>
+      </div>
     </li>
-    <li><span class="t">16:00</span><div class="what-row"><span class="what">Thuis in Badhoevedorp</span></div></li>
+    <li>
+      <span class="t">16:00</span>
+      <span class="mark" aria-hidden="true"><span class="dot"><svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20h14V9.5"/><path d="M9 20v-6h6v6"/></svg></span></span>
+      <div class="body">
+        <div class="what-row"><span class="what">Thuis in Badhoevedorp</span></div>
+      </div>
+    </li>
   </ol>
 </section>
 
