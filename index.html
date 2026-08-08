@@ -150,6 +150,21 @@
   }
   .maplink:hover{background:var(--river);color:var(--card);}
 
+  .status{
+    background:linear-gradient(135deg, var(--river-soft), #f0f4ef);
+    border:1px solid var(--line);
+    border-left:3px solid var(--river);
+    padding:14px 16px;margin:0 0 28px;font-size:14px;
+    display:flex;gap:12px;align-items:flex-start;
+  }
+  .status > svg{width:18px;height:18px;stroke:var(--river);flex-shrink:0;margin-top:1px;}
+  .status strong{display:block;margin-bottom:4px;}
+  .status .pct{
+    display:inline-block;font-weight:700;font-variant-numeric:tabular-nums;
+    color:var(--river);background:#fff;border:1px solid var(--line);
+    border-radius:6px;padding:1px 7px;margin:0 2px;
+  }
+
   .callout{
     background:var(--card);border-left:3px solid var(--gold);
     padding:14px 16px;margin:22px 0 0;font-size:14px;
@@ -209,16 +224,23 @@
   <div class="fact">
     <dt>
       <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h8l-1 8 10-12h-8l1-8z"/></svg>
-      Laden Trier
+      Accu nu
     </dt>
-    <dd><a href="https://www.google.com/maps/search/?api=1&query=Tesla+Supercharger+Zurmaiener+Strasse+Trier" target="_blank" rel="noopener">Supercharger Zurmaiener Str.</a>, 8 palen, 250 kW</dd>
+    <dd>54 procent — Irrel heen en terug kan, daarna laden in Trier</dd>
+  </div>
+  <div class="fact">
+    <dt>
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h8l-1 8 10-12h-8l1-8z"/></svg>
+      Laden vandaag
+    </dt>
+    <dd><a href="https://www.google.com/maps/dir/?api=1&destination=Tesla+Supercharger+Zurmaiener+Strasse+Trier" target="_blank" rel="noopener">Supercharger Zurmaiener Str.</a>, na Irrel tot ±90 procent</dd>
   </div>
   <div class="fact">
     <dt>
       <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 17h14"/><path d="M7 17V7a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v10"/><path d="M9 17v2"/><path d="M15 17v2"/><path d="M9 10h6"/></svg>
-      Laden terugweg
+      Laden zondag
     </dt>
-    <dd><a href="https://www.google.com/maps/search/?api=1&query=Tesla+Supercharger+Slakweg+5+Maastricht" target="_blank" rel="noopener">Supercharger Maastricht</a>, dan lunch bij <a href="https://www.google.com/maps/search/?api=1&query=M%27ART+Rijksweg+80+Maastricht" target="_blank" rel="noopener">M'ART</a></dd>
+    <dd><a href="https://www.google.com/maps/dir/?api=1&destination=Tesla+Supercharger+Slakweg+5+Maastricht" target="_blank" rel="noopener">Supercharger Maastricht</a> vóór lunch bij <a href="https://www.google.com/maps/search/?api=1&query=M%27ART+Rijksweg+80+Maastricht" target="_blank" rel="noopener">M'ART</a>; backup Liège</dd>
   </div>
   <div class="fact">
     <dt>
@@ -228,6 +250,14 @@
     <dd><a href="https://www.google.com/maps/search/?api=1&query=Palastgarten+Trier" target="_blank" rel="noopener">Palastgarten</a>, dagelijks vanaf 17:00</dd>
   </div>
 </dl>
+
+<div class="status">
+  <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h8l-1 8 10-12h-8l1-8z"/></svg>
+  <div>
+    <strong>Zaterdag nu — accu op <span class="pct">54%</span></strong>
+    Irrel heen en terug is ongeveer 70 tot 80 km, reken op zo’n 12 tot 15 procent. Daarna laden in Trier tot circa 90 procent, anders wordt zondag naar Maastricht krap.
+  </div>
+</div>
 
 <section class="day">
   <div class="day-head"><h2>Vrijdag</h2><span>Heenreis en dineren</span></div>
@@ -298,37 +328,43 @@
 <section class="day">
   <div class="day-head"><h2>Zaterdag</h2><span>Irrel, laden en Gala</span></div>
   <ol class="rail">
-    <li>
-      <span class="t">10:00</span>
-      <span class="mark" aria-hidden="true"><span class="dot"><svg viewBox="0 0 24 24"><path d="M5 17h14v-5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2z"/><path d="M7 10V7a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v3"/><circle cx="7.5" cy="17" r="1.5"/><circle cx="16.5" cy="17" r="1.5"/></svg></span></span>
+    <li class="anchor">
+      <span class="t">Nu</span>
+      <span class="mark" aria-hidden="true"><span class="dot"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 16v-4"/><path d="M12 16v-2"/><path d="M17 16V8"/></svg></span></span>
       <div class="body">
-        <div class="what-row"><span class="what">Vertrek naar Irrel</span> <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=Parkplatz+Irreler+Wasserf%C3%A4lle+Pr%C3%BCmzurlayer+Strasse+Irrel" target="_blank" rel="noopener">Kaart</a></div>
-        <span class="where">Parkeerplaats "Irreler Wasserfälle" aan de L4, Prümzurlayer Straße, 54666 Irrel. Gratis, middelgroot. Ongeveer 35 tot 40 minuten rijden.</span>
+        <div class="what-row">
+          <span class="what">Navigeer naar parkeerplaats Irrel</span>
+          <a class="maplink" href="https://www.google.com/maps/dir/?api=1&destination=Parkplatz+Irreler+Wasserf%C3%A4lle,+Pr%C3%BCmzurlayer+Stra%C3%9Fe,+54666+Irrel" target="_blank" rel="noopener">Navigeer</a>
+        </div>
+        <span class="where">Parkplatz "Irreler Wasserfälle", Prümzurlayer Straße / L4, 54666 Irrel. Gratis, middelgroot, startpunt van de wandeling. Ongeveer 35 tot 40 minuten vanuit Trier. Accu staat op 54 procent — ruim genoeg voor heen en terug.</span>
       </div>
     </li>
     <li class="anchor">
-      <span class="t">10:45</span>
+      <span class="t">±1 u</span>
       <span class="mark" aria-hidden="true"><span class="dot"><svg viewBox="0 0 24 24"><path d="m14 6-4 4 4 4"/><path d="M10 10h9"/><path d="M4 20v-2a4 4 0 0 1 4-4h1"/><circle cx="7" cy="6" r="2"/></svg></span></span>
       <div class="body">
         <div class="what-row"><span class="what">Wandeling: Irreler Wasserfälle</span></div>
         <span class="where">Ongeveer 3 km, ruim een uur. Stroomversnellingen van de Prüm over grote rotsblokken, met de nieuwe hangbrug uit 2023, 110 meter lang en 16 meter hoog.</span>
-        <p class="note">Rond de brug kan het 's zomers druk zijn, dus vroeg gaan is prettiger. De rest van de route is rustiger.</p>
+        <p class="note">Rond de brug kan het druk zijn. De rest van de route is rustiger.</p>
       </div>
     </li>
     <li>
-      <span class="t">12:15</span>
+      <span class="t">Terug</span>
       <span class="mark" aria-hidden="true"><span class="dot"><svg viewBox="0 0 24 24"><path d="M5 17h14v-5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2z"/><path d="M7 10V7a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v3"/><circle cx="7.5" cy="17" r="1.5"/><circle cx="16.5" cy="17" r="1.5"/></svg></span></span>
       <div class="body">
-        <div class="what-row"><span class="what">Terug naar Trier voor lunch</span></div>
-        <span class="where">Zelfde rijtijd terug, dus rond 13:00 weer in de Altstadt. Bijvoorbeeld <a href="https://www.google.com/maps/search/?api=1&query=Restaurant+Kartoffel+Kiste+Fahrstrasse+13+Trier" target="_blank" rel="noopener">Kartoffel Kiste</a> of <a href="https://www.google.com/maps/search/?api=1&query=Leanis+Cafe+Viehmarktstrasse+11+Trier" target="_blank" rel="noopener">Leanis Cafe</a>.</span>
+        <div class="what-row"><span class="what">Terug naar Trier</span></div>
+        <span class="where">Zelfde rijtijd terug. Na de ronde Irrel reken je op circa 40 procent over. Lunch in de Altstadt: bijvoorbeeld <a href="https://www.google.com/maps/search/?api=1&query=Restaurant+Kartoffel+Kiste+Fahrstrasse+13+Trier" target="_blank" rel="noopener">Kartoffel Kiste</a> of <a href="https://www.google.com/maps/search/?api=1&query=Leanis+Cafe+Viehmarktstrasse+11+Trier" target="_blank" rel="noopener">Leanis Cafe</a>.</span>
       </div>
     </li>
     <li class="anchor">
-      <span class="t">15:00</span>
+      <span class="t">Laden</span>
       <span class="mark" aria-hidden="true"><span class="dot"><svg viewBox="0 0 24 24"><path d="M13 2 3 14h8l-1 8 10-12h-8l1-8z"/></svg></span></span>
       <div class="body">
-        <div class="what-row"><span class="what">Laden</span> <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=Tesla+Supercharger+Zurmaiener+Strasse+Trier" target="_blank" rel="noopener">Kaart</a></div>
-        <span class="where">Supercharger Zurmaiener Straße bij het E-Center. Laden tot 90 procent, dan is zondag geregeld.</span>
+        <div class="what-row">
+          <span class="what">Supercharger Trier — tot ±90 procent</span>
+          <a class="maplink" href="https://www.google.com/maps/dir/?api=1&destination=Tesla+Supercharger+Zurmaiener+Strasse+Trier" target="_blank" rel="noopener">Navigeer</a>
+        </div>
+        <span class="where">Zurmaiener Straße bij het E-Center, 8 palen, 250 kW. Dit is de belangrijke stop: met 90 procent red je zondag Trier → Maastricht Supercharger → M'ART zonder krappe marges.</span>
       </div>
     </li>
     <li class="anchor">
@@ -362,30 +398,47 @@
 </section>
 
 <section class="day">
-  <div class="day-head"><h2>Zondag</h2><span>Terugreis</span></div>
+  <div class="day-head"><h2>Zondag</h2><span>Terugreis via M'ART</span></div>
   <ol class="rail">
     <li>
       <span class="t">09:30</span>
       <span class="mark" aria-hidden="true"><span class="dot"><svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/></svg></span></span>
       <div class="body">
         <div class="what-row"><span class="what">Ontbijt en uitchecken</span></div>
-        <span class="where">Accu staat op circa 90 procent, dus direct weg.</span>
+        <span class="where">Idealiter na gisteren laden op circa 90 procent. Zonder die top-up: laat Tesla een Supercharger op de route zetten.</span>
       </div>
     </li>
     <li>
       <span class="t">09:45</span>
       <span class="mark" aria-hidden="true"><span class="dot"><svg viewBox="0 0 24 24"><path d="M5 17h14v-5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2z"/><path d="M7 10V7a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v3"/><circle cx="7.5" cy="17" r="1.5"/><circle cx="16.5" cy="17" r="1.5"/></svg></span></span>
       <div class="body">
-        <div class="what-row"><span class="what">Vertrek richting Maastricht</span></div>
-        <span class="where">Via Luxemburg en Luik, ongeveer 290 km. Een Model Y doet dat op ruwweg 70 tot 80 procent.</span>
+        <div class="what-row">
+          <span class="what">Vertrek naar M'ART Maastricht</span>
+          <a class="maplink" href="https://www.google.com/maps/dir/?api=1&destination=M%27ART+Rijksweg+80+Maastricht" target="_blank" rel="noopener">Navigeer</a>
+        </div>
+        <span class="where">Via Luxemburg en Luik, ongeveer 230 tot 250 km tot M'ART. Zet in de Tesla als bestemming M'ART of de Supercharger Maastricht — de auto plant dan eventuele tussenstops.</span>
+      </div>
+    </li>
+    <li class="anchor">
+      <span class="t">±11:30</span>
+      <span class="mark" aria-hidden="true"><span class="dot"><svg viewBox="0 0 24 24"><path d="M13 2 3 14h8l-1 8 10-12h-8l1-8z"/></svg></span></span>
+      <div class="body">
+        <div class="what-row">
+          <span class="what">Backup-laadplek: Liège Cora Rocourt</span>
+          <a class="maplink" href="https://www.google.com/maps/dir/?api=1&destination=Tesla+Supercharger+Cora+Rocourt+Li%C3%A8ge" target="_blank" rel="noopener">Navigeer</a>
+        </div>
+        <span class="where">Alleen nodig als je onder de 70 procent uit Trier vertrekt of de auto een stop voorstelt. 16 palen, onderweg naar Maastricht. Alternatief dichterbij: Supercharger Luxemburg Mënsbech.</span>
       </div>
     </li>
     <li class="anchor">
       <span class="t">12:30</span>
       <span class="mark" aria-hidden="true"><span class="dot"><svg viewBox="0 0 24 24"><path d="M13 2 3 14h8l-1 8 10-12h-8l1-8z"/></svg></span></span>
       <div class="body">
-        <div class="what-row"><span class="what">Laden in Maastricht</span> <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=Tesla+Supercharger+Slakweg+5+Maastricht" target="_blank" rel="noopener">Kaart</a></div>
-        <span class="where">Supercharger Slakweg 5, 24 palen, 24/7. Reken op 25 minuten.</span>
+        <div class="what-row">
+          <span class="what">Supercharger Maastricht — vóór de lunch</span>
+          <a class="maplink" href="https://www.google.com/maps/dir/?api=1&destination=Tesla+Supercharger+Slakweg+5+Maastricht" target="_blank" rel="noopener">Navigeer</a>
+        </div>
+        <span class="where">Slakweg 5, 24 palen, 24/7. Beste vaste stop: laden tot genoeg voor huis (of ±70 procent), dan 1,3 km doorrijden naar M'ART. Reken op 20 tot 25 minuten.</span>
       </div>
     </li>
     <li class="anchor">
@@ -395,9 +448,9 @@
         <div class="what-row">
           <span class="what">Lunch bij M'ART</span>
           <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Gereserveerd</span>
-          <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=M%27ART+Rijksweg+80+Maastricht" target="_blank" rel="noopener">Kaart</a>
+          <a class="maplink" href="https://www.google.com/maps/dir/?api=1&destination=M%27ART+Rijksweg+80+Maastricht" target="_blank" rel="noopener">Navigeer</a>
         </div>
-        <span class="where">Rijksweg 80, 1,3 km voorbij de laadpalen. Zondag open vanaf 12:00, eigen terras met uitzicht over de velden, parkeren bij de zaak.</span>
+        <span class="where">Rijksweg 80. Zondag open vanaf 12:00, eigen terras, parkeren bij de zaak.</span>
       </div>
     </li>
     <li>
@@ -405,7 +458,7 @@
       <span class="mark" aria-hidden="true"><span class="dot"><svg viewBox="0 0 24 24"><path d="M5 17h14v-5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2z"/><path d="M7 10V7a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v3"/><circle cx="7.5" cy="17" r="1.5"/><circle cx="16.5" cy="17" r="1.5"/></svg></span></span>
       <div class="body">
         <div class="what-row"><span class="what">Laatste stuk naar huis</span></div>
-        <span class="where">Ongeveer 200 km via de A2. Alternatieve stop: <a href="https://www.google.com/maps/search/?api=1&query=Tesla+Supercharger+Aalsterweg+322+Eindhoven" target="_blank" rel="noopener">Supercharger Eindhoven</a>, 24 palen.</span>
+        <span class="where">Ongeveer 200 km via de A2. Extra stop indien nodig: <a href="https://www.google.com/maps/dir/?api=1&destination=Tesla+Supercharger+Aalsterweg+322+Eindhoven" target="_blank" rel="noopener">Supercharger Eindhoven</a>, 24 palen.</span>
       </div>
     </li>
     <li>
@@ -416,6 +469,13 @@
       </div>
     </li>
   </ol>
+  <div class="callout">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h8l-1 8 10-12h-8l1-8z"/></svg>
+    <div>
+      <strong>Laadplan in het kort</strong>
+      Vandaag na Irrel: Trier Supercharger → ±90%. Zondag: bestemming M'ART zetten; vaste top-up bij Supercharger Maastricht (Slakweg 5) vlak voor de lunch. Backup onderweg: Liège Cora Rocourt.
+    </div>
+  </div>
 </section>
 
 <footer>
